@@ -1,5 +1,5 @@
 #include "../include/Graph.hpp"
-
+#include <iostream>
 Graph::Graph(uint32_t nodeCount)
 {
     nodes.reserve(nodeCount);
@@ -18,28 +18,34 @@ void Graph::addEdge(uint32_t n1, uint32_t n2)
 
 bool Graph::isBipartite()
 {
-    for (const Node& node : nodes)
-    {
-        if (node.type != NONE) continue;
-        if (!isBipartite(node.getIdx(), EVEN)) return false;
-    }
-
-    return true;
-}
-
-bool Graph::isBipartite(uint32_t current, Type prev)
-{
-    Node& currentNode = nodes[current];
+    std::stack<uint32_t> st;
     
-    if (currentNode.type == prev) return false;
-    if (currentNode.type != NONE) return true;
-
-    currentNode.type = (prev == EVEN) ? ODD : EVEN;
-
-    // checks bipartity of all neighbors by Depth-First search
-    for (uint32_t neighbor : currentNode.getNeighbors())
+    for (Node& n : nodes)
     {
-        if (!isBipartite(neighbor, currentNode.type)) return false;
+        if (n.type != NONE) continue;
+
+        n.type = EVEN;
+        st.push(n.getIdx());
+
+        while (!st.empty())
+        {
+            uint32_t current = st.top();
+            st.pop();
+
+            Type currentType = nodes[current].type;
+            Type nextType = (currentType == EVEN) ? ODD : EVEN;
+
+            for (uint32_t adjacent : nodes[current].getNeighbors())
+            {
+                Type adjacentType = nodes[adjacent].type;
+
+                if (adjacentType == currentType) return false;
+                if (adjacentType != NONE) continue;
+                
+                nodes[adjacent].type = nextType;             
+                st.push(adjacent);
+            }
+        }
     }
 
     return true;
