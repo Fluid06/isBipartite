@@ -20,7 +20,7 @@ enum Color
  * @brief Reprezentuje konkrétní vrchol grafu
  * 
  * Jedná se o pouhý datový kontejner bez větší vnitřní logiky. Ukládá informace o jedinečném indexu jednoznačně identifikujícím
- * aktuální vrchol, dále jeho bravu, tedy do jaké ze dvou, respektive tří, skupin je možné jej zařadit a množinu indexů všech sousedních vrcholů.
+ * aktuální vrchol, dále jeho barvu, tedy do jaké ze dvou, respektive tří, skupin je možné jej zařadit a množinu indexů všech sousedních vrcholů.
  * Množina indexů sousedních vrcholů je realizována pomocí vektoru. Je tedy v paměti uložena v jednom souvislém bloku a přístup k jednotlivým
  * prvkům je možný v konstantním čase.
  */
@@ -30,7 +30,7 @@ private:
     /**
      * @brief Jedinečný identifikátor vrcholu
      * 
-     * Celé nezáporné číslo vyjadřující hodnotu/číslo vrcholu. Rozsah neznaménkového celočíselného 32-bitového čísla je od 0 do 4 294 967 296.
+     * Celé nezáporné číslo vyjadřující hodnotu/číslo vrcholu. Rozsah neznaménkového celočíselného 32-bitového čísla je od 0 do 4 294 967 295.
      * Tento rozsah by měl pokrývat potřeby absolutní většiny případů z reálného světa.
      * Hodnoty, kterých může idx reálně v konkrétním případě nabývat, jsou v rozsahu od 0 do n-1, kde n je celkový počet vrcholů v grafu.
      * Tato hodnota je neměnná a zároveň slouží jako přímý index hlavního pole všech uzlů v grafu (std::vector<Vertex> nodes).
@@ -52,7 +52,7 @@ private:
     /**
      * @brief Množina indexů sousedních vrcholů
      * 
-     * Obsahuje indexy vrcholů, mezi nimiž a aktuálním vrcholem existuje hrana, tedy indexy sousedních vrcholů.
+     * Obsahuje indexy vrcholů, které jsou s aktuálním vrcholem přímo spojeny hranou, tedy indexy sousedních vrcholů.
      * Hodnoty jsou uloženy pomocí vektoru, přístup k jednotlivým hodnotám je tak možný v konstantním čase.
      */
     std::vector<uint32_t> neighbors;
