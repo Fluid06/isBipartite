@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(isBipartite
     src/main.cpp
-    src/Node.cpp
+    src/Vertex.cpp
     src/Graph.cpp
 )
 

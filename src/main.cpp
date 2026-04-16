@@ -5,7 +5,7 @@
 
 int main()
 {
-    std::ifstream f("../test/BipartiteGraph1.txt");
+    std::ifstream f("../test/CyclicGraph.txt");
     
     if (!f.is_open()) 
     {
