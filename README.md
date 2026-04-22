@@ -8,4 +8,12 @@ Předpokladem je, že graf 𝐺 má 𝑛 vrcholů, které jsou očíslovány 0, 
 
 Program nejprve vytvoří instanci grafu načteného z matice sousednosti zapsané v testovacím souboru a následně na něm ověřuje bipartitu pomocí vyhledávacího algoritmu (Depth-First Search).
 
-![Bipartity graph](image.png)
+![Bipartity graph](bipartity_graph.png)
+
+## Jak projekt zkompilovat
+Předpokladem je mít nainstalovaný CMake (verze 3.10+) a kompilátor podporující C++17.
+
+1. `mkdir build`
+2. `cd build`
+3. `cmake ..`
+4. `make`
