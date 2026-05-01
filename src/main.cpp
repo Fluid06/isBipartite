@@ -5,7 +5,7 @@
 
 int main()
 {
-    std::ifstream f("../test/CyclicGraph.txt");
+    std::ifstream f("../test/BipartiteGraph3.txt");
     
     if (!f.is_open()) 
     {
@@ -21,10 +21,10 @@ int main()
     
     Graph graph(matrixSize);
 
-    for (unsigned int row = 0; row < matrixSize; row++)
+    for (uint32_t row = 0; row < matrixSize; row++)
     {
         std::getline(f, line);
-        for (unsigned int col = row; col < matrixSize; col++)
+        for (uint32_t col = row; col < matrixSize; col++)
         {  
             if (line[col] == '1')
             {
@@ -32,7 +32,16 @@ int main()
             }
         }
     }
-    std::cout << "Graphs bipartity: " << graph.isBipartite() << std::endl;
+
+    f.close();
+
+    if (graph.isBipartite())
+    {
+        std::cout << "Graf je bipartitni." << std::endl;
+    } else
+    {
+        std::cout << "Graf neni bipartitni." << std::endl;
+    }
 
     return 0;
 }
