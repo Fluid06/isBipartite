@@ -11,6 +11,6 @@ add_executable(isBipartite
     src/Graph.cpp
 )
 
-target_compile_options(isBipartite PRIVATE -Wall -Wextra -fsanitize=address)
+target_compile_options(isBipartite PRIVATE -O3 -Wall -Wextra -fsanitize=address)
 target_link_options(isBipartite PRIVATE -fsanitize=address)
 target_include_directories(isBipartite PRIVATE include)
