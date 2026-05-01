@@ -1,11 +1,14 @@
 #include <iostream>
 #include <fstream>
+#include <chrono>
 
 #include "../include/Graph.hpp"
 
+#define PATH "../test/BipartiteGraph4.txt"
+
 int main()
 {
-    std::ifstream f("../test/BipartiteGraph3.txt");
+    std::ifstream f(PATH);
     
     if (!f.is_open()) 
     {
