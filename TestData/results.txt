@@ -1,0 +1,10 @@
+Graph in BipartiteGraph1.txt is bipartite
+Graph in BipartiteGraph2.txt is bipartite
+Graph in CyclicGraph.txt is not bipartite
+Graph in bp_test_0.txt is not bipartite
+Graph in bp_test_1.txt is not bipartite
+Graph in bp_test_2.txt is bipartite
+Graph in bp_test_3.txt is bipartite
+Graph in bp_test_4.txt is not bipartite
+Graph in bp_test_5.txt is not bipartite
+Graph in bp_test_6.txt is not bipartite
