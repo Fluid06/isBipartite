@@ -1,50 +1,69 @@
 #include <iostream>
+#include <string>
 #include <fstream>
-#include <chrono>
+#include <filesystem>
+#include <vector>
+#include <algorithm>
 
-#include "../include/Graph.hpp"
+#include "Graph.hpp"
 
-#define PATH "../test/BipartiteGraph4.txt"
+const std::string PATH = "../TestData";
 
 int main()
 {
-    std::ifstream f(PATH);
-    
-    if (!f.is_open()) 
-    {
-        std::cout << "Soubor nebylo mozne nalezt nebo jej otevrit." << std::endl;
-        return 1;
-    }
+    std::vector<std::filesystem::path> testFiles;
 
-    std::string line;
-    uint32_t matrixSize;
-    
-    std::getline(f, line);
-    matrixSize = stoi(line);
-    
-    Graph graph(matrixSize);
-
-    for (uint32_t row = 0; row < matrixSize; row++)
+    for (const auto& file : std::filesystem::directory_iterator(PATH))
     {
-        std::getline(f, line);
-        for (uint32_t col = row; col < matrixSize; col++)
-        {  
-            if (line[col] == '1')
-            {
-                graph.addEdge(row, col);
-            }
+        if (file.path().filename() != "results.txt")
+        {
+            testFiles.push_back(file);
         }
     }
 
-    f.close();
+    sort(testFiles.begin(), testFiles.end());
 
-    if (graph.isBipartite())
+    for (const auto& filepath : testFiles)
     {
-        std::cout << "Graf je bipartitni." << std::endl;
-    } else
-    {
-        std::cout << "Graf neni bipartitni." << std::endl;
+        std::ifstream f(filepath.string());
+        
+        if (!f.is_open()) 
+        {
+            std::cout << "Soubor nebylo mozne nalezt nebo jej otevrit." << std::endl;
+            return 1;
+        }
+    
+        std::string line;
+        uint32_t matrixSize;
+        
+        std::getline(f, line);
+        matrixSize = stoi(line);
+        
+        Graph graph(matrixSize);
+
+        for (uint32_t row = 0; row < matrixSize; row++)
+        {
+            std::getline(f, line);
+            for (uint32_t col = row; col < matrixSize; col++)
+            {
+                if (line[col] == '1')
+                {
+                    graph.addEdge(row, col);
+                }
+            }
+        }
+    
+        f.close();
+    
+        if (graph.isBipartite())
+        {
+            std::cout << "Graph in " << filepath.filename().string() << " is bipartite" << std::endl;
+        } else
+        {
+            std::cout << "Graph in " << filepath.filename().string() << " is not bipartite" << std::endl;
+        }
     }
+
 
     return 0;
 }
